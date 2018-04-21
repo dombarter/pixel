@@ -87,23 +87,14 @@ function move() {
     }
 }
 
-//creating first pixel
-var pixelOne = new pixel(20, "#FF6C00", 0, 0);
-arrayOfPixels.push(pixelOne);
-
-//creating second pixel
-var pixelTwo = new pixel(20, "#FF6C00", 0, 0)
-pixelTwo.xVelocity = 25;
-pixelTwo.bounce = 1;
-arrayOfPixels.push(pixelTwo);
-
 //starting redraw and move functions
 window.requestAnimationFrame(redraw);
 var iterval = setInterval(move, 20);
 
 //click event listener
 canvasId.addEventListener("click", function () {
-    alert("hello");
+    var pixelToAdd = new pixel(20, "#FF6C00", 0, 0);
+    arrayOfPixels.push(pixelToAdd);
 })
 
 
