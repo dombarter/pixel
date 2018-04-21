@@ -22,6 +22,10 @@ function pixel(sideLength, color, startX, startY) {
     this.gravity = 10;
     this.xVelocity = 10;
     this.yVelocity = 10;
+    function speed(speed) {
+        this.xVelocity = speed;
+        this.yVelocity = speed;
+    }
 }
 
 //where all pixels are stored
@@ -93,7 +97,9 @@ var iterval = setInterval(move, 20);
 
 //click event listener
 canvasId.addEventListener("click", function () {
-    var pixelToAdd = new pixel(20, "#FF6C00", 0, 0);
+    var fixedColor = "#FF6C00";
+    var randomColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
+    var pixelToAdd = new pixel(20, randomColor, 0, 0);
     arrayOfPixels.push(pixelToAdd);
 })
 
