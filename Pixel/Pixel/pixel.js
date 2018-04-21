@@ -51,28 +51,34 @@ function redraw() {
 function move() {
     for (var a = 0; a < arrayOfPixels.length; a++) {
 
+        var bounce = 1 / arrayOfPixels[a].bounce;
+
         //hitting x max border
-        if (arrayOfPixels[a].x > width - arrayOfPixels[a].sideLength) {
+        if (arrayOfPixels[a].x >= width - arrayOfPixels[a].sideLength) {
+            arrayOfPixels[a].xVelocity = (arrayOfPixels[a].xVelocity) / bounce;
             arrayOfPixels[a].xVelocity = -1 * (arrayOfPixels[a].xVelocity);
-            arrayOfPixels[a].xVelocity = (arrayOfPixels[a].xVelocity) * (arrayOfPixels[a].bounce);
+            alert(arrayOfPixels[a].xVelocity);
         }
 
         //hitting y  max border
-        if (arrayOfPixels[a].y > height - arrayOfPixels[a].sideLength) {
+        if (arrayOfPixels[a].y >= height - arrayOfPixels[a].sideLength) {
+            arrayOfPixels[a].yVelocity = (arrayOfPixels[a].yVelocity) / bounce;
             arrayOfPixels[a].yVelocity = -1 * (arrayOfPixels[a].yVelocity);
-            arrayOfPixels[a].yVelocity = (arrayOfPixels[a].yVelocity) * (arrayOfPixels[a].bounce);
+            alert(arrayOfPixels[a].yVelocity);
         }
 
         //hitting x min border
         if (arrayOfPixels[a].x < 0) {
+            arrayOfPixels[a].xVelocity = (arrayOfPixels[a].xVelocity) / bounce;
             arrayOfPixels[a].xVelocity = -1 * (arrayOfPixels[a].xVelocity);
-            arrayOfPixels[a].xVelocity = (arrayOfPixels[a].xVelocity) * (arrayOfPixels[a].bounce);
+            alert(arrayOfPixels[a].xVelocity);
         }
 
         //hitting y min border
         if (arrayOfPixels[a].y < 0) {
-            arrayOfPixels[a].yVelocity = -1 * (arrayOfPixels[a].yVelocity);
-            arrayOfPixels[a].yVelocity = (arrayOfPixels[a].yVelocity) * (arrayOfPixels[a].bounce);
+            arrayOfPixels[a].yVelocity = (arrayOfPixels[a].yVelocity) / bounce;
+            arrayOfPixels[a].yVelocity = -1 * (arrayOfPixels[a].yVelocity);   
+            alert(arrayOfPixels[a].yVelocity);
         }
 
         //changing x & y locations
