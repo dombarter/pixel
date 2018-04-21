@@ -15,6 +15,9 @@ function square(sideLength, color, startX, startY) {
     this.y = startY;
     this.sideLength = sideLength;
     this.color = color;
+    this.mass = 1;
+    this.bounce = 1;
+    this.gravity = 10;
 }
 
 createCanvas(window.innerWidth, window.innerHeight, "#171717", "pixelCanvas"); //create canvas
@@ -22,10 +25,14 @@ createCanvas(window.innerWidth, window.innerHeight, "#171717", "pixelCanvas"); /
 var canvasId = document.getElementById("pixelCanvas");
 var canvas = canvasId.getContext("2d");
 
-var squareOne = new square(25, "#FF6C00",0,0);
+var squareOne = new square(25, "#FF6C00", 0, 0);
+
+var mass = squareOne.mass;
+alert(mass);
 
 canvas.fillStyle = squareOne.color;
 canvas.fillRect(squareOne.x, squareOne.y, squareOne.sideLength, squareOne.sideLength);
+
 
 
 canvasId.addEventListener("click", function () {
