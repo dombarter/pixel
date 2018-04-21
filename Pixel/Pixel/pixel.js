@@ -55,30 +55,30 @@ function move() {
 
         //hitting x max border
         if (arrayOfPixels[a].x >= width - arrayOfPixels[a].sideLength) {
-            arrayOfPixels[a].xVelocity = (arrayOfPixels[a].xVelocity) / bounce;
+            arrayOfPixels[a].xVelocity = Math.floor((arrayOfPixels[a].xVelocity) / bounce);
             arrayOfPixels[a].xVelocity = -1 * (arrayOfPixels[a].xVelocity);
-            alert(arrayOfPixels[a].xVelocity);
+            //alert(arrayOfPixels[a].xVelocity);
         }
 
         //hitting y  max border
         if (arrayOfPixels[a].y >= height - arrayOfPixels[a].sideLength) {
-            arrayOfPixels[a].yVelocity = (arrayOfPixels[a].yVelocity) / bounce;
+            arrayOfPixels[a].yVelocity = Math.floor((arrayOfPixels[a].yVelocity) / bounce);
             arrayOfPixels[a].yVelocity = -1 * (arrayOfPixels[a].yVelocity);
-            alert(arrayOfPixels[a].yVelocity);
+            //alert(arrayOfPixels[a].yVelocity);
         }
 
         //hitting x min border
         if (arrayOfPixels[a].x < 0) {
-            arrayOfPixels[a].xVelocity = (arrayOfPixels[a].xVelocity) / bounce;
+            arrayOfPixels[a].xVelocity = Math.floor((arrayOfPixels[a].xVelocity) / bounce);
             arrayOfPixels[a].xVelocity = -1 * (arrayOfPixels[a].xVelocity);
-            alert(arrayOfPixels[a].xVelocity);
+            //alert(arrayOfPixels[a].xVelocity);
         }
 
         //hitting y min border
         if (arrayOfPixels[a].y < 0) {
-            arrayOfPixels[a].yVelocity = (arrayOfPixels[a].yVelocity) / bounce;
+            arrayOfPixels[a].yVelocity = Math.floor((arrayOfPixels[a].yVelocity) / bounce);
             arrayOfPixels[a].yVelocity = -1 * (arrayOfPixels[a].yVelocity);   
-            alert(arrayOfPixels[a].yVelocity);
+            //alert(arrayOfPixels[a].yVelocity);
         }
 
         //changing x & y locations
@@ -93,7 +93,8 @@ arrayOfPixels.push(pixelOne);
 
 //creating second pixel
 var pixelTwo = new pixel(20, "#FF6C00", 0, 0)
-pixelTwo.bounce = 0.5;
+pixelTwo.xVelocity = 25;
+pixelTwo.bounce = 1;
 arrayOfPixels.push(pixelTwo);
 
 //starting redraw and move functions
