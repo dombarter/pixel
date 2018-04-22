@@ -12,20 +12,16 @@ function createCanvas(width, height, backgroundColor, canvasId) {
 }
 
 //pixel object
-function pixel(sideLength, color, startX, startY) {
+function pixel(id,sideLength, color, startX, startY) {
+    this.id = id;
     this.x = startX;
     this.y = startY;
     this.sideLength = sideLength;
     this.color = color;
     this.mass = 1;
-    this.bounce = 1;
     this.gravity = 10;
     this.xVelocity = 10;
     this.yVelocity = 10;
-    function speed(speed) {
-        this.xVelocity = speed;
-        this.yVelocity = speed;
-    }
 }
 
 //where all pixels are stored
@@ -55,34 +51,24 @@ function redraw() {
 function move() {
     for (var a = 0; a < arrayOfPixels.length; a++) {
 
-        var bounce = 1 / arrayOfPixels[a].bounce;
-
         //hitting x max border
         if (arrayOfPixels[a].x >= width - arrayOfPixels[a].sideLength) {
-            arrayOfPixels[a].xVelocity = Math.floor((arrayOfPixels[a].xVelocity) / bounce);
             arrayOfPixels[a].xVelocity = -1 * (arrayOfPixels[a].xVelocity);
-            //alert(arrayOfPixels[a].xVelocity);
         }
 
         //hitting y  max border
         if (arrayOfPixels[a].y >= height - arrayOfPixels[a].sideLength) {
-            arrayOfPixels[a].yVelocity = Math.floor((arrayOfPixels[a].yVelocity) / bounce);
             arrayOfPixels[a].yVelocity = -1 * (arrayOfPixels[a].yVelocity);
-            //alert(arrayOfPixels[a].yVelocity);
         }
 
         //hitting x min border
         if (arrayOfPixels[a].x < 0) {
-            arrayOfPixels[a].xVelocity = Math.floor((arrayOfPixels[a].xVelocity) / bounce);
             arrayOfPixels[a].xVelocity = -1 * (arrayOfPixels[a].xVelocity);
-            //alert(arrayOfPixels[a].xVelocity);
         }
 
         //hitting y min border
         if (arrayOfPixels[a].y < 0) {
-            arrayOfPixels[a].yVelocity = Math.floor((arrayOfPixels[a].yVelocity) / bounce);
             arrayOfPixels[a].yVelocity = -1 * (arrayOfPixels[a].yVelocity);   
-            //alert(arrayOfPixels[a].yVelocity);
         }
 
         //changing x & y locations
@@ -95,12 +81,16 @@ function move() {
 window.requestAnimationFrame(redraw);
 var iterval = setInterval(move, 20);
 
+//counter
+var counter = 1;
+
 //click event listener
 canvasId.addEventListener("click", function () {
     var fixedColor = "#FF6C00";
     var randomColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
-    var pixelToAdd = new pixel(20, randomColor, 0, 0);
+    var pixelToAdd = new pixel(counter,20, randomColor, 0, 0);
     arrayOfPixels.push(pixelToAdd);
+    counter++;
 })
 
 
