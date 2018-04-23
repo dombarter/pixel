@@ -40,33 +40,33 @@ var height = window.innerHeight;
 //check collision
 function checkCollision(pixel1, pixel2) {
 
-    //y 1
-    if (pixel1.y - pixel2.sideLength <= pixel2.y && pixel2.y <= pixel1.y) {
-        pixel1.yVelocity = -1 * (pixel1.yVelocity);
-        pixel2.yVelocity = -1 * (pixel2.yVelocity);
+    if (pixel1.y - pixel2.sideLength <= pixel2.y && pixel2.y <= pixel1.y) {       
+        if (pixel1.x - pixel2.sideLength <= pixel2.x && pixel2.x <= pixel1.x || pixel2.x - pixel1.sideLength <= pixel1.x && pixel1.x <= pixel2.x) {
+            pixel1.yVelocity = -1 * (pixel1.yVelocity);
+            pixel2.yVelocity = -1 * (pixel2.yVelocity);
+        }
     }
-    //y 2
-    if (pixel2.y - pixel1.sideLength <= pixel1.y && pixel1.y <= pixel2.y){
-        pixel1.yVelocity = -1 * (pixel1.yVelocity);
-        pixel2.yVelocity = -1 * (pixel2.yVelocity);
+
+    if (pixel2.y - pixel1.sideLength <= pixel1.y && pixel1.y <= pixel2.y) {
+        if (pixel1.x - pixel2.sideLength <= pixel2.x && pixel2.x <= pixel1.x || pixel2.x - pixel1.sideLength <= pixel1.x && pixel1.x <= pixel2.x) {
+            pixel1.yVelocity = -1 * (pixel1.yVelocity);
+            pixel2.yVelocity = -1 * (pixel2.yVelocity);
+        }
     }
-    //x 1
-    if (pixel1.x - pixel2.sideLength <= pixel2.x && pixel2.x <= pixel1.x) {
-        pixel1.xVelocity = -1 * (pixel1.xVelocity);
-        pixel2.xVelocity = -1 * (pixel2.xVelocity);
+
+    if (pixel1.x - pixel2.sideLength <= pixel2.x && pixel2.x <= pixel1.x) {       
+        if (pixel1.y - pixel2.sideLength <= pixel2.y && pixel2.y <= pixel1.y || pixel2.y - pixel1.sideLength <= pixel1.y && pixel1.y <= pixel2.y) {
+            pixel1.xVelocity = -1 * (pixel1.xVelocity);
+            pixel2.xVelocity = -1 * (pixel2.xVelocity);
+        }
     }
-    //x 2
+
     if (pixel2.x - pixel1.sideLength <= pixel1.x && pixel1.x <= pixel2.x) {
-        pixel1.xVelocity = -1 * (pixel1.xVelocity);
-        pixel2.xVelocity = -1 * (pixel2.xVelocity);
+        if (pixel1.y - pixel2.sideLength <= pixel2.y && pixel2.y <= pixel1.y || pixel2.y - pixel1.sideLength <= pixel1.y && pixel1.y <= pixel2.y) {
+            pixel1.xVelocity = -1 * (pixel1.xVelocity);
+            pixel2.xVelocity = -1 * (pixel2.xVelocity);
+        }
     }
-
-
-    //x then y
-
-
-    //y then x
-
 
 }
 
@@ -83,7 +83,9 @@ function redraw() {
 //move function
 function move() {
 
-    checkCollision(arrayOfPixels[0], arrayOfPixels[1]);    
+    checkCollision(arrayOfPixels[0], arrayOfPixels[1]);
+    checkCollision(arrayOfPixels[0], arrayOfPixels[2]);
+    checkCollision(arrayOfPixels[1], arrayOfPixels[2]);
 
     for (var a = 0; a < arrayOfPixels.length; a++) {
 
@@ -131,7 +133,12 @@ arrayOfPixels.push(pixelToAdd);
 counter++;
 
 randomColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
-pixelToAdd = new pixel(counter, 20, randomColor, 450, 100);
+pixelToAdd = new pixel(counter, 20, randomColor, 450, 300);
+arrayOfPixels.push(pixelToAdd);
+counter++;
+
+randomColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
+pixelToAdd = new pixel(counter, 20, randomColor, 280, 200);
 arrayOfPixels.push(pixelToAdd);
 counter++;
 
