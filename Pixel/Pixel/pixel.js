@@ -40,7 +40,7 @@ var height = window.innerHeight;
 //check collision
 function checkCollision(pixel1, pixel2) {
 
-    if (pixel1.x < pixel2.x) { //pixel 1 is on left
+    if (pixel1.x > pixel2.x) { //pixel 1 is on left
 
         if (pixel1.y > pixel2.y) { //pixel1 is on top
 
@@ -52,7 +52,7 @@ function checkCollision(pixel1, pixel2) {
 
         }
     }
-    else if (pixel1.x > pixel2.x) { //pixel1 is on right
+    else if (pixel1.x < pixel2.x) { //pixel1 is on right
 
         if (pixel1.y > pixel2.y) { //pixel1 is on top
 
