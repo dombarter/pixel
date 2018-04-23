@@ -20,8 +20,8 @@ function pixel(id,sideLength, color, startX, startY) {
     this.color = color;
     this.mass = 1;
     this.gravity = 10;
-    this.xVelocity = 10;
-    this.yVelocity = 10;
+    this.xVelocity = 4;
+    this.yVelocity = 4;
 }
 
 //where all pixels are stored
@@ -40,52 +40,26 @@ var height = window.innerHeight;
 //check collision
 function checkCollision(pixel1, pixel2) {
 
-    if (pixel1.x > pixel2.x) { //pixel 1 is on left
-
-        if (pixel1.y > pixel2.y) { //pixel1 is on top
-
-        }
-        else if (pixel1.y < pixel2.y) { //pixel1 is on bottom
-
-        }
-        else { //pixel1 is in line
-
-        }
+    //y 1
+    if (pixel1.y - pixel2.sideLength <= pixel2.y && pixel2.y <= pixel1.y) {
+        pixel1.yVelocity = -1 * (pixel1.yVelocity);
+        pixel2.yVelocity = -1 * (pixel2.yVelocity);
     }
-    else if (pixel1.x < pixel2.x) { //pixel1 is on right
-
-        if (pixel1.y > pixel2.y) { //pixel1 is on top
-
-        }
-        else if (pixel1.y < pixel2.y) { //pixel1 is on bottom
-
-        }
-        else { //pixel1 is in line
-
-        }
+    //y 2
+    if (pixel2.y - pixel1.sideLength <= pixel1.y && pixel1.y <= pixel2.y){
+        pixel1.yVelocity = -1 * (pixel1.yVelocity);
+        pixel2.yVelocity = -1 * (pixel2.yVelocity);
     }
-    else { //pixel 1 is in line (x)
-
-        //alert();
-
-        if (pixel1.y < pixel2.y) { //pixel1 is on top
-            if (pixel2.y - pixel1.sideLength <= pixel1.y) { //collision detected
-                pixel1.yVelocity = -1 * (pixel1.yVelocity);
-                pixel2.yVelocity = -1 * (pixel2.yVelocity);
-            }
-        }
-        else if (pixel1.y > pixel2.y) { //pixel1 is on bottom
-            if (pixel1.y - pixel2.sideLength <= pixel2.y) {
-                pixel1.yVelocity = -1 * (pixel1.yVelocity);
-                pixel2.yVelocity = -1 * (pixel2.yVelocity);
-            }
-        }
-        else { //pixel1 is in line
-            pixel1.yVelocity = -1 * (pixel1.yVelocity);
-            pixel2.yVelocity = -1 * (pixel2.yVelocity);
-        }
+    //x 1
+    if (pixel1.x - pixel2.sideLength <= pixel2.x && pixel2.x <= pixel1.x) {
+        pixel1.xVelocity = -1 * (pixel1.xVelocity);
+        pixel2.xVelocity = -1 * (pixel2.xVelocity);
     }
-
+    //x 2
+    if (pixel2.x - pixel1.sideLength <= pixel1.x && pixel1.x <= pixel2.x) {
+        pixel1.xVelocity = -1 * (pixel1.xVelocity);
+        pixel2.xVelocity = -1 * (pixel2.xVelocity);
+    }
 }
 
 //redraw function
@@ -101,7 +75,7 @@ function redraw() {
 //move function
 function move() {
 
-    checkCollision(arrayOfPixels[0], arrayOfPixels[1]);
+    checkCollision(arrayOfPixels[0], arrayOfPixels[1]);    
 
     for (var a = 0; a < arrayOfPixels.length; a++) {
 
@@ -144,14 +118,12 @@ var counter = 1;
 
 var fixedColor = "#FF6C00";
 var randomColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
-var pixelToAdd = new pixel(counter, 20, randomColor, 100, 0);
-pixelToAdd.xVelocity = 0;
+var pixelToAdd = new pixel(counter, 20, randomColor, 100, 300);
 arrayOfPixels.push(pixelToAdd);
 counter++;
 
 randomColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
-pixelToAdd = new pixel(counter, 20, randomColor, 100, 300);
-pixelToAdd.xVelocity = 0;
+pixelToAdd = new pixel(counter, 20, randomColor, 450, 100);
 arrayOfPixels.push(pixelToAdd);
 counter++;
 
@@ -159,8 +131,7 @@ counter++;
 canvasId.addEventListener("click", function () {
     var fixedColor = "#FF6C00";
     var randomColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
-    var pixelToAdd = new pixel(counter, 20, randomColor, 100, 0);
-    pixelToAdd.xVelocity = 0;
+    var pixelToAdd = new pixel(counter, 20, randomColor, 0, 0);
     arrayOfPixels.push(pixelToAdd);
     counter++;
 })
