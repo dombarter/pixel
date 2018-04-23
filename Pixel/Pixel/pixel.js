@@ -39,9 +39,6 @@ var height = window.innerHeight;
 
 //check collision
 function checkCollision(pixel1, pixel2) {
-    //check x then nested y
-
-    //check y then nested x
 
     if (pixel1.x < pixel2.x) { //pixel 1 is on left
 
@@ -67,16 +64,18 @@ function checkCollision(pixel1, pixel2) {
 
         }
     }
-    else { //pixel 1 is in line
+    else { //pixel 1 is in line (x)
 
-        if (pixel1.y > pixel2.y) { //pixel1 is on top
-            if (pixel2.y += pixel1.sideLength >= pixel1.y) { //collision detected
+        //alert();
+
+        if (pixel1.y < pixel2.y) { //pixel1 is on top
+            if (pixel2.y - pixel1.sideLength <= pixel1.y) { //collision detected
                 pixel1.yVelocity = -1 * (pixel1.yVelocity);
                 pixel2.yVelocity = -1 * (pixel2.yVelocity);
             }
         }
-        else if (pixel1.y < pixel2.y) { //pixel1 is on bottom
-            if (pixel1.y += pixel2.sideLength >= pixel2.y) {
+        else if (pixel1.y > pixel2.y) { //pixel1 is on bottom
+            if (pixel1.y - pixel2.sideLength <= pixel2.y) {
                 pixel1.yVelocity = -1 * (pixel1.yVelocity);
                 pixel2.yVelocity = -1 * (pixel2.yVelocity);
             }
@@ -101,6 +100,9 @@ function redraw() {
 
 //move function
 function move() {
+
+    checkCollision(arrayOfPixels[0], arrayOfPixels[1]);
+
     for (var a = 0; a < arrayOfPixels.length; a++) {
 
         //hitting x max border
@@ -123,10 +125,14 @@ function move() {
             arrayOfPixels[a].yVelocity = -1 * (arrayOfPixels[a].yVelocity);   
         }
 
+        
+
         //changing x & y locations
         arrayOfPixels[a].x += arrayOfPixels[a].xVelocity;
         arrayOfPixels[a].y += arrayOfPixels[a].yVelocity;
     }
+
+    
 }
 
 //starting redraw and move functions
@@ -136,11 +142,25 @@ var iterval = setInterval(move, 20);
 //counter
 var counter = 1;
 
+var fixedColor = "#FF6C00";
+var randomColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
+var pixelToAdd = new pixel(counter, 20, randomColor, 100, 0);
+pixelToAdd.xVelocity = 0;
+arrayOfPixels.push(pixelToAdd);
+counter++;
+
+randomColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
+pixelToAdd = new pixel(counter, 20, randomColor, 100, 300);
+pixelToAdd.xVelocity = 0;
+arrayOfPixels.push(pixelToAdd);
+counter++;
+
 //click event listener
 canvasId.addEventListener("click", function () {
     var fixedColor = "#FF6C00";
     var randomColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
-    var pixelToAdd = new pixel(counter,20, randomColor, 0, 0);
+    var pixelToAdd = new pixel(counter, 20, randomColor, 100, 0);
+    pixelToAdd.xVelocity = 0;
     arrayOfPixels.push(pixelToAdd);
     counter++;
 })
