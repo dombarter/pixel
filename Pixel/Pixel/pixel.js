@@ -47,7 +47,7 @@ function checkCollision(pixel1, pixel2) {
         }
     }
 
-    if (pixel2.y - pixel1.sideLength <= pixel1.y && pixel1.y <= pixel2.y) {
+    else if (pixel2.y - pixel1.sideLength <= pixel1.y && pixel1.y <= pixel2.y) {
         if (pixel1.x - pixel2.sideLength <= pixel2.x && pixel2.x <= pixel1.x || pixel2.x - pixel1.sideLength <= pixel1.x && pixel1.x <= pixel2.x) {
             pixel1.yVelocity = -1 * (pixel1.yVelocity);
             pixel2.yVelocity = -1 * (pixel2.yVelocity);
@@ -61,7 +61,7 @@ function checkCollision(pixel1, pixel2) {
         }
     }
 
-    if (pixel2.x - pixel1.sideLength <= pixel1.x && pixel1.x <= pixel2.x) {
+    else if (pixel2.x - pixel1.sideLength <= pixel1.x && pixel1.x <= pixel2.x) {
         if (pixel1.y - pixel2.sideLength <= pixel2.y && pixel2.y <= pixel1.y || pixel2.y - pixel1.sideLength <= pixel1.y && pixel1.y <= pixel2.y) {
             pixel1.xVelocity = -1 * (pixel1.xVelocity);
             pixel2.xVelocity = -1 * (pixel2.xVelocity);
