@@ -20,8 +20,8 @@ function pixel(id,sideLength, color, startX, startY) {
     this.color = color;
     this.mass = 1;
     this.gravity = 10;
-    this.xVelocity = 4;
-    this.yVelocity = 4;
+    this.xVelocity = 5;
+    this.yVelocity = 5;
 }
 
 //where all pixels are stored
@@ -40,6 +40,7 @@ var height = window.innerHeight;
 //check collision
 function checkCollision(pixel1, pixel2) {
 
+    /*
     if (pixel1.y - pixel2.sideLength <= pixel2.y && pixel2.y <= pixel1.y) {       
         if (pixel1.x - pixel2.sideLength <= pixel2.x && pixel2.x <= pixel1.x || pixel2.x - pixel1.sideLength <= pixel1.x && pixel1.x <= pixel2.x) {
             pixel1.yVelocity = -1 * (pixel1.yVelocity);
@@ -66,6 +67,59 @@ function checkCollision(pixel1, pixel2) {
             pixel1.xVelocity = -1 * (pixel1.xVelocity);
             pixel2.xVelocity = -1 * (pixel2.xVelocity);
         }
+    }
+    */
+
+    var xCollisionPossible = false;
+    var yCollisionPossible = false;
+
+    //checking if collision could even happen
+    if (pixel1.x > pixel2.x) { //pixel 1 on right
+        if (pixel1.x - pixel2.sideLength <= pixel2.x) {
+           // alert("pixel on left")
+            xCollisionPossible = true;
+        }
+    }
+    if (pixel2.x > pixel1.x) { //pixel2 on right
+        if (pixel2.x - pixel.sideLength <= pixel1.x) {
+            //alert("pixel on right")
+            xCollisionPossible = true;
+        }
+    }
+    if (pixel1.x == pixel2.x) {
+        //alert("same x")
+        xCollisionPossible = true;
+    }
+
+    if (pixel1.y > pixel2.y) { //pixel 1 below 
+        if (pixel1.y - pixel2.sideLength <= pixel2.y) {
+            //alert("pixel below")
+            yCollisionPossible = true;
+        }
+    }
+    if (pixel2.y > pixel1.y) { //pixel 2 is below
+        if (pixel2.y - pixel1.sideLength <= pixel1.y) {
+            //alert("pixel above")
+            yCollisionPossible = true;
+        }
+    }
+    if (pixel1.y == pixel2.y) {
+        //alert("same y")
+        yCollisionPossible = true;
+    }
+
+    if (xCollisionPossible == true && yCollisionPossible == true) {
+        pixel1.xVelocity = pixel1.xVelocity * -1;
+        pixel2.xVelocity = pixel2.xVelocity * -1;
+
+        //work out if it is more an x collision or more a y collision
+
+        //work out if the pixels are moving in the same plane in this collision, if so reduce velocity
+
+        //if moving in opposite planes flip velocity
+
+        //work out momentum using P = MV
+
     }
 
 }
@@ -128,17 +182,17 @@ var counter = 1;
 
 var fixedColor = "#FF6C00";
 var randomColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
-var pixelToAdd = new pixel(counter, 20, randomColor, 100, 300);
+var pixelToAdd = new pixel(counter, 20, randomColor, 200, 300);
 arrayOfPixels.push(pixelToAdd);
 counter++;
 
 randomColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
-pixelToAdd = new pixel(counter, 20, randomColor, 450, 300);
+pixelToAdd = new pixel(counter, 20, randomColor, 300, 400);
 arrayOfPixels.push(pixelToAdd);
 counter++;
 
 randomColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
-pixelToAdd = new pixel(counter, 20, randomColor, 280, 200);
+pixelToAdd = new pixel(counter, 20, randomColor, 420, 400);
 arrayOfPixels.push(pixelToAdd);
 counter++;
 
